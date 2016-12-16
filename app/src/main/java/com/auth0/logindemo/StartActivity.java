@@ -1,8 +1,6 @@
 package com.auth0.logindemo;
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 
 import com.auth0.android.Auth0;
 import com.auth0.android.authentication.AuthenticationAPIClient;
@@ -23,7 +21,7 @@ public class StartActivity extends BaseActitvity {
     @Override
     public void init() {
         AuthenticationAPIClient client = new AuthenticationAPIClient(
-                new Auth0(getString(R.string.auth0_client_id), getString(R.string.auth0_domain)));
+                new Auth0(getString(R.string.com_auth0_client_id), getString(R.string.com_auth0_domain)));
         String token = SharedPreferenceUtils.getIdToken(this);
         if (token != null) {
             client.tokenInfo(SharedPreferenceUtils.getIdToken(this))

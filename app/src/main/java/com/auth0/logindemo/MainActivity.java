@@ -20,8 +20,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.messaging.FirebaseMessaging;
 
-import java.util.HashMap;
-
 import butterknife.BindView;
 import butterknife.OnClick;
 import rx.Subscriber;
@@ -43,7 +41,7 @@ public class MainActivity extends BaseActitvity {
     @Override
     public void init() {
         AuthenticationAPIClient client = new AuthenticationAPIClient(
-                new Auth0(getString(R.string.auth0_client_id), getString(R.string.auth0_domain)));
+                new Auth0(getString(R.string.com_auth0_client_id), getString(R.string.com_auth0_domain)));
         Log.d("asdf", "auth token is " + SharedPreferenceUtils.getIdToken(this));
 
         client.tokenInfo(SharedPreferenceUtils.getIdToken(this))

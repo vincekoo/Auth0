@@ -7,7 +7,7 @@ import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
-    public static final String BASE_URL = "http://10.0.1.108:3000";
+    public static final String BASE_URL = "http://10.0.1.132:3000";
     private static Retrofit.Builder retrofitBuilder =
             new Retrofit.Builder()
                     .baseUrl(BASE_URL)

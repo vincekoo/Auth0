@@ -25,6 +25,7 @@
 
         <activity android:name=".LoginActivity" />
         <activity android:name=".MainActivity" />
+        <activity android:name=".CustomLoginActivity" />
 
         <!-- Auth0 Lock -->
         <activity
@@ -40,7 +41,7 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:host="@string/auth0_domain"
+                    android:host="@string/com_auth0_domain"
                     android:pathPrefix="/android/com.auth0.logindemo/callback"
                     android:scheme="https" />
             </intent-filter>
@@ -49,6 +50,29 @@
         <activity
             android:name="com.auth0.android.provider.WebAuthActivity"
             android:theme="@style/Lock.Theme" />
+
+        <activity
+            android:name="com.auth0.android.lock.CountryCodeActivity"
+            android:theme="@style/Lock.Theme" />
+
+        <activity
+            android:name="com.auth0.android.lock.PasswordlessLockActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/Lock.Theme">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="@string/com_auth0_domain"
+                    android:pathPrefix="/android/com.auth0.logindemo/callback"
+                    android:scheme="https" />
+            </intent-filter>
+        </activity>
         <!-- Auth0 Lock End -->
 
         <meta-data android:name="com.urbanairship.autopilot"

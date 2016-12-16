@@ -1,6 +1,5 @@
 package com.auth0.logindemo;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,6 +10,7 @@ import com.auth0.android.Auth0;
 import com.auth0.android.lock.AuthenticationCallback;
 import com.auth0.android.lock.Lock;
 import com.auth0.android.lock.LockCallback;
+import com.auth0.android.lock.PasswordlessLock;
 import com.auth0.android.lock.utils.LockException;
 import com.auth0.android.result.Credentials;
 
@@ -19,6 +19,7 @@ import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
     private Lock mLock;
+    private PasswordlessLock pLock;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -27,7 +28,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void init() {
-        Auth0 auth0 = new Auth0(getString(R.string.auth0_client_id), getString(R.string.auth0_domain));
+        Auth0 auth0 = new Auth0(getString(R.string.com_auth0_client_id), getString(R.string.com_auth0_domain));
 
         Map<String, Object> authParams = new HashMap<>();
         authParams.put("prompt", "select_account");
@@ -36,7 +37,12 @@ public class LoginActivity extends AppCompatActivity {
                 .withAuthenticationParameters(authParams)
                 //Add parameters to the builder
                 .build(this);
-        startActivity(mLock.newIntent(this));
+
+        pLock = PasswordlessLock.newBuilder(auth0, mCallback)
+                //Customize Lock
+                .build(this);
+
+        startActivity(pLock.newIntent(this));
     }
 
     @Override
@@ -45,6 +51,9 @@ public class LoginActivity extends AppCompatActivity {
         // Your own Activity code
         mLock.onDestroy(this);
         mLock = null;
+
+        pLock.onDestroy(this);
+        pLock = null;
     }
 
     private final LockCallback mCallback = new AuthenticationCallback() {
